@@ -1,11 +1,13 @@
 import React from 'react'
 import CardColumns from 'react-bootstrap/CardColumns'
+import VideoCard from '../components/videoCard'
 
 const VideoList = ({ videos }) => {
-	console.log(videos)
 	return (
 		<CardColumns>
-
+			{videos.map(video => {
+				return <VideoCard {...video} />
+			})}
 		</CardColumns>
 	)
 }
