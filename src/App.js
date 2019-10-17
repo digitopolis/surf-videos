@@ -4,6 +4,7 @@ import './App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import SearchBar from './components/searchBar'
+import VideoList from './containers/videoList'
 
 class App extends React.Component {
 
@@ -25,7 +26,7 @@ class App extends React.Component {
 					<SearchBar />
 				</Row>
 				<Row>
-					<h1>videos here</h1>
+					<VideoList videos={this.state.searchResults}/>
 				</Row>
 			</Container>
 	  );
