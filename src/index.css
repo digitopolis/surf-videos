@@ -12,12 +12,39 @@ code {
     monospace;
 }
 
-/* show 4 columns on medium and larger screens */
-@media (min-width: 768px) {
+/* show 4 columns extra large screens */
+@media (min-width: 1029px) {
     .card-columns {
         -webkit-column-count: 4;
         -moz-column-count: 4;
         column-count: 4;
+    }
+}
+
+/* show 3 columns larger screens */
+@media (max-width: 1028px) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+/* show 2 columns on medium screens */
+@media (max-width: 768px) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+/* show 1 columns on smaller screens */
+@media (max-width: 580px) {
+    .card-columns {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
     }
 }
 
