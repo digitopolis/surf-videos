@@ -3,6 +3,7 @@ import { SURFVIDEOS, ONEVIDEO } from './apiEndpoints'
 import './App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import BackButton from './components/backButton'
 import SearchBar from './components/searchBar'
 import VideoList from './containers/videoList'
 import VideoContainer from './containers/videoContainer'
@@ -52,6 +53,7 @@ class App extends React.Component {
 	  return (
 			<Container>
 				<Row className='justify-content-center my-3'>
+					{this.state.selectedVideo ? <BackButton deselectVideo={this.handleVideoDeselect}/> : null}
 					<SearchBar />
 				</Row>
 				<Row>

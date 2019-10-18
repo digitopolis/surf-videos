@@ -1,9 +1,17 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
+import Col from 'react-bootstrap/Col'
 
-const BackButton = (props) => {
+const BackButton = ({ deselectVideo }) => {
 	return (
-		<Button>Back to search</Button>
+		<Col className='mr-4'>
+			<Button
+				variant='secondary'
+				onClick={deselectVideo}
+			>
+				Back
+			</Button>
+		</Col>
 	)
 }
 
