@@ -12,10 +12,16 @@ code {
     monospace;
 }
 
+/* show 4 columns on medium and larger screens */
 @media (min-width: 768px) {
     .card-columns {
         -webkit-column-count: 4;
         -moz-column-count: 4;
         column-count: 4;
     }
+}
+
+div.iframeContainer {
+	width: 100%;
+	height: auto;
 }
