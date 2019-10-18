@@ -9,7 +9,9 @@ import VideoList from './containers/videoList'
 class App extends React.Component {
 
 	state = {
-		searchResults: []
+		searchResults: [],
+		selectedVideo: null,
+		videoDetails: {}
 	}
 
 	async componentDidMount() {
