@@ -1,5 +1,5 @@
 import React from 'react';
-import { SURFVIDEOS } from './apiEndpoints'
+import { SURFVIDEOS, ONEVIDEO } from './apiEndpoints'
 import './App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -16,6 +16,14 @@ class App extends React.Component {
 		const data = await fetch(SURFVIDEOS).then(res => res.json())
 		this.setState({
 			searchResults: data.items
+		})
+	}
+
+	handleVideoSelect = async (videoId) => {
+		const details = await fetch(`${ONEVIDEO}id=${videoId}`).then(res => res.json())
+		this.setState({
+			selectedVideo: videoId,
+			videoDetails: details.items[0]
 		})
 	}
 
