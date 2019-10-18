@@ -30,6 +30,13 @@ class App extends React.Component {
 		})
 	}
 
+	handleVideoDeselect = () => {
+		this.setState({
+			selectedVideo: null,
+			videoDetails: {}
+		})
+	}
+
 	renderMainContent = () => {
 		if (this.state.selectedVideo) {
 			return <VideoContainer details={this.state.videoDetails}/>
