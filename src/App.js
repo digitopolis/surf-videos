@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import SearchBar from './components/searchBar'
 import VideoList from './containers/videoList'
+import VideoContainer from './containers/videoContainer'
 
 class App extends React.Component {
 
@@ -29,6 +30,17 @@ class App extends React.Component {
 		})
 	}
 
+	renderMainContent = () => {
+		if (this.state.selectedVideo) {
+			return <VideoContainer details={this.state.videoDetails}/>
+		} else {
+			return <VideoList
+							videos={this.state.searchResults}
+							handleVideoSelect={this.handleVideoSelect}
+						/>
+		}
+	}
+
 	render() {
 	  return (
 			<Container>
@@ -36,10 +48,7 @@ class App extends React.Component {
 					<SearchBar />
 				</Row>
 				<Row>
-					<VideoList
-						videos={this.state.searchResults}
-						handleVideoSelect={this.handleVideoSelect}
-					/>
+					{this.renderMainContent()}
 				</Row>
 			</Container>
 	  );
