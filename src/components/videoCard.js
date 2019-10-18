@@ -1,10 +1,12 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
 
-const VideoCard = ({ snippet }) => {
+const VideoCard = ({ id, snippet, handleVideoSelect }) => {
 	const thumbnailUrl = snippet.thumbnails.medium.url
 	return (
-		<Card>
+		<Card
+			style={{ cursor:'pointer' }}
+			onClick={ () => handleVideoSelect(id.videoId) }>
 			<Card.Img variant='top' src={thumbnailUrl} />
 			<Card.Body>
 				<Card.Title>{snippet.title}</Card.Title>

@@ -36,7 +36,10 @@ class App extends React.Component {
 					<SearchBar />
 				</Row>
 				<Row>
-					<VideoList videos={this.state.searchResults}/>
+					<VideoList
+						videos={this.state.searchResults}
+						handleVideoSelect={this.handleVideoSelect}
+					/>
 				</Row>
 			</Container>
 	  );
