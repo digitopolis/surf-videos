@@ -70,16 +70,26 @@ getVideos = async (searchTerm, pageToken = '', channelId = '') => {
 }
 
 loadMoreVideos = async () => {
-	const searchResults = await this.getVideos(this.state.searchTerm, this.state.nextPageToken)
-	const newVideoList = [...this.state.videos, ...searchResults.videos]
-	this.setState({
-		videos: newVideoList,
-		nextPageToken: searchResults.pageToken
-	})
+	if (this.state.selectedVideo) {
+		const channelId = this.state.videoDetails.snippet.channelId
+		const searchResults = await this.getUserVideos(channelId, this.state.userVideosPageToken)
+		const newVideoList = [...this.state.moreUserVideos, ...searchResults.videos]
+		this.setState({
+			moreUserVideos: newVideoList,
+			userVideosPageToken: searchResults.pageToken
+		})
+	} else {
+		const searchResults = await this.getVideos(this.state.searchTerm, this.state.nextPageToken)
+		const newVideoList = [...this.state.videos, ...searchResults.videos]
+		this.setState({
+			videos: newVideoList,
+			nextPageToken: searchResults.pageToken
+		})
+	}
 }
 
-getUserVideos = async (channelId) => {
-	const searchResults = await this.getVideos('', '', channelId)
+getUserVideos = async (channelId, pageToken = '') => {
+	const searchResults = await this.getVideos('', pageToken, channelId)
 	return searchResults
 }
 
