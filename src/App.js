@@ -93,7 +93,9 @@ handleReset = async () => {
 
 	renderMainContent = () => {
 		if (this.state.selectedVideo) {
-			return <VideoContainer details={this.state.videoDetails}/>
+			return <VideoContainer {...this.state.videoDetails}
+							videos={this.state.moreUserVideos}
+							handleVideoSelect={this.handleVideoSelect}/>
 		} else {
 			return <VideoList
 							videos={this.state.videos}
