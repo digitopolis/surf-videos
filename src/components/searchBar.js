@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
 						<InputGroup.Append>
 							<Button variant='secondary' type='submit'>Search</Button>
 							<Button
-								variant='secondary'
+								variant={this.props.resetStyle}
 								onClick={this.props.resetSearch}>Reset</Button>
 						</InputGroup.Append>
 					</InputGroup>
