@@ -12,20 +12,28 @@ class App extends React.Component {
 
 	state = {
 		searchTerm: 'surf',
-		searchResults: [],
+		videos: [],
+		nextPageToken: '',
 		selectedVideo: null,
 		videoDetails: {}
 	}
 
 	async componentDidMount() {
 		const searchResults = await this.getVideos('surf')
-		this.setState({ searchResults })
+		this.setState({
+			videos: searchResults.videos,
+		 	nextPageToken: searchResults.pageToken
+		})
 	}
 
 	handleSearch = async (newSearch) => {
 		const searchTerm = `${this.state.searchTerm} ${newSearch}`
 		const searchResults = await this.getVideos(searchTerm)
-		this.setState({ searchTerm, searchResults })
+		this.setState({
+			searchTerm: searchTerm,
+			videos: searchResults.videos,
+		 	nextPageToken: searchResults.pageToken
+		})
 	}
 
 	handleVideoSelect = async (videoId) => {
@@ -44,14 +52,30 @@ class App extends React.Component {
 	}
 
 getVideos = async (searchTerm, pageToken = '') => {
+	const results = {}
 	const data = await fetch(`${YTSEARCH}&q=${searchTerm}&pageToken=${pageToken}`).then(res => res.json())
-	return data.items
+	results.videos = data.items
+	results.pageToken = data.nextPageToken
+	return results
+}
+
+loadMoreVideos = async (pageToken) => {
+	const searchResults = await this.getVideos(this.state.searchTerm, this.state.nextPageToken)
+	const newVideoList = [...this.state.videos, ...searchResults.videos]
+	this.setState({
+		videos: newVideoList,
+		nextPageToken: searchResults.pageToken
+	})
 }
 
 handleReset = async () => {
 	const searchTerm = 'surf'
 	const searchResults = await this.getVideos(searchTerm)
-	this.setState({ searchTerm, searchResults })
+	this.setState({
+		searchTerm: searchTerm,
+		videos: searchResults.videos,
+	 	nextPageToken: searchResults.pageToken
+	})
 }
 
 	renderMainContent = () => {
@@ -59,7 +83,7 @@ handleReset = async () => {
 			return <VideoContainer details={this.state.videoDetails}/>
 		} else {
 			return <VideoList
-							videos={this.state.searchResults}
+							videos={this.state.videos}
 							handleVideoSelect={this.handleVideoSelect}
 						/>
 		}
