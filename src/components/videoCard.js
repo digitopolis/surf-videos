@@ -6,7 +6,7 @@ const VideoCard = ({ id, snippet, handleVideoSelect }) => {
 	return (
 		<Card
 			style={{ cursor:'pointer' }}
-			onClick={ () => handleVideoSelect(id.videoId) }>
+			onClick={ () => handleVideoSelect(id.videoId, snippet.channelId) }>
 			<Card.Img variant='top' src={thumbnailUrl} />
 			<Card.Body>
 				<Card.Title>{snippet.title}</Card.Title>
