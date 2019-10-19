@@ -18,14 +18,12 @@ class App extends React.Component {
 	}
 
 	async componentDidMount() {
-		// const data = await fetch(`${YTSEARCH}&q=${this.state.searchTerm}`).then(res => res.json())
 		const searchResults = await this.getVideos('surf')
 		this.setState({ searchResults })
 	}
 
 	handleSearch = async (newSearch) => {
 		const searchTerm = `${this.state.searchTerm} ${newSearch}`
-		// const data = await fetch(`${YTSEARCH}&q=${newSearch}`).then(res => res.json())
 		const searchResults = await this.getVideos(searchTerm)
 		this.setState({ searchTerm, searchResults })
 	}
@@ -48,6 +46,12 @@ class App extends React.Component {
 getVideos = async (searchTerm) => {
 	const data = await fetch(`${YTSEARCH}&q=${searchTerm}`).then(res => res.json())
 	return data.items
+}
+
+handleReset = async () => {
+	const searchTerm = 'surf'
+	const searchResults = await this.getVideos(searchTerm)
+	this.setState({ searchTerm, searchResults })
 }
 
 	renderMainContent = () => {
