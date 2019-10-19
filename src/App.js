@@ -16,7 +16,8 @@ class App extends React.Component {
 		nextPageToken: '',
 		selectedVideo: null,
 		videoDetails: {},
-		moreUserVideos: []
+		moreUserVideos: [],
+		userVideosPageToken: ''
 	}
 
 	async componentDidMount() {
@@ -43,7 +44,8 @@ class App extends React.Component {
 		this.setState({
 			selectedVideo: videoId,
 			videoDetails: details.items[0],
-			moreUserVideos: moreVideos
+			moreUserVideos: moreVideos.videos,
+			userVideosPageToken: moreVideos.pageToken
 		})
 	}
 
@@ -78,7 +80,7 @@ loadMoreVideos = async () => {
 
 getUserVideos = async (channelId) => {
 	const searchResults = await this.getVideos('', '', channelId)
-	return searchResults.videos
+	return searchResults
 }
 
 handleReset = async () => {
