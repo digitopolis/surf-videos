@@ -23,6 +23,15 @@ class App extends React.Component {
 		})
 	}
 
+	handleSearch = async (searchTerm) => {
+		const newSearch = `${this.state.searchTerm} ${searchTerm}`
+		const data = await fetch(`${YTSEARCH}&q=${newSearch}`).then(res => res.json())
+		this.setState({
+			searchTerm: newSearch,
+			searchResults: data.items
+		})
+	}
+
 	handleVideoSelect = async (videoId) => {
 		const details = await fetch(`${ONEVIDEO}id=${videoId}`).then(res => res.json())
 		this.setState({
