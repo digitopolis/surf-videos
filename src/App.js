@@ -64,7 +64,7 @@ class App extends React.Component {
 			<Container>
 				<Row className='justify-content-center my-3'>
 					{this.state.selectedVideo ? <BackButton deselectVideo={this.handleVideoDeselect}/> : null}
-					<SearchBar />
+					<SearchBar newSearch={this.handleSearch}/>
 				</Row>
 				<Row>
 					{this.renderMainContent()}

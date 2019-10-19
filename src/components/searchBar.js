@@ -16,10 +16,15 @@ class SearchBar extends React.Component {
 		this.setState({ searchTerm })
 	}
 
+	handleSubmit = (event) => {
+		event.preventDefault()
+		this.props.handleSubmit(this.state.searchTerm)
+	}
+
 	render() {
 		return (
 			<Col md={{ span: 7 }} className='py-1'>
-				<Form >
+				<Form onSubmit={this.handleSubmit}>
 					<InputGroup>
 						<FormControl
 							placeholder='Search'
