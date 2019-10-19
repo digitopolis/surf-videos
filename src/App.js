@@ -101,7 +101,9 @@ handleReset = async () => {
 	this.setState({
 		searchTerm: searchTerm,
 		videos: searchResults.videos,
-	 	nextPageToken: searchResults.pageToken
+	 	nextPageToken: searchResults.pageToken,
+		selectedVideo: null,
+		videoDetails: {},
 	})
 }
 
