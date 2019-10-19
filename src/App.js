@@ -15,7 +15,8 @@ class App extends React.Component {
 		videos: [],
 		nextPageToken: '',
 		selectedVideo: null,
-		videoDetails: {}
+		videoDetails: {},
+		moreUserVideos: []
 	}
 
 	async componentDidMount() {
@@ -36,11 +37,13 @@ class App extends React.Component {
 		})
 	}
 
-	handleVideoSelect = async (videoId) => {
+	handleVideoSelect = async (videoId, channelId) => {
 		const details = await fetch(`${ONEVIDEO}id=${videoId}`).then(res => res.json())
+		const moreVideos = await this.getUserVideos(channelId)
 		this.setState({
 			selectedVideo: videoId,
-			videoDetails: details.items[0]
+			videoDetails: details.items[0],
+			moreUserVideos: moreVideos
 		})
 	}
 
@@ -51,9 +54,14 @@ class App extends React.Component {
 		})
 	}
 
-getVideos = async (searchTerm, pageToken = '') => {
+getVideos = async (searchTerm, pageToken = '', channelId = '') => {
 	const results = {}
-	const data = await fetch(`${YTSEARCH}&q=${searchTerm}&pageToken=${pageToken}`).then(res => res.json())
+	let channelParam = ''
+	// google api doesn't accept channelId of an empty string
+	if (channelId !== '') {
+		channelParam = `&channelId=${channelId}`
+	}
+	const data = await fetch(`${YTSEARCH}&q=${searchTerm}&pageToken=${pageToken}${channelParam}`).then(res => res.json())
 	results.videos = data.items
 	results.pageToken = data.nextPageToken
 	return results
@@ -66,6 +74,11 @@ loadMoreVideos = async () => {
 		videos: newVideoList,
 		nextPageToken: searchResults.pageToken
 	})
+}
+
+getUserVideos = async (channelId) => {
+	const searchResults = await this.getVideos('', '', channelId)
+	return searchResults.videos
 }
 
 handleReset = async () => {
