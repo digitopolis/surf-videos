@@ -18,7 +18,7 @@ class SearchBar extends React.Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		this.props.handleSubmit(this.state.searchTerm)
+		this.props.newSearch(this.state.searchTerm)
 	}
 
 	render() {
@@ -32,6 +32,9 @@ class SearchBar extends React.Component {
 							onChange={this.handleChange}/>
 						<InputGroup.Append>
 							<Button variant='secondary' type='submit'>Search</Button>
+							<Button
+								variant='secondary'
+								onClick={this.props.resetSearch}>Reset</Button>
 						</InputGroup.Append>
 					</InputGroup>
 				</Form>

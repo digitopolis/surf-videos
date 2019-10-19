@@ -70,7 +70,7 @@ handleReset = async () => {
 			<Container>
 				<Row className='justify-content-center my-3'>
 					{this.state.selectedVideo ? <BackButton deselectVideo={this.handleVideoDeselect}/> : null}
-					<SearchBar newSearch={this.handleSearch}/>
+					<SearchBar newSearch={this.handleSearch} resetSearch={this.handleReset}/>
 				</Row>
 				<Row>
 					{this.renderMainContent()}
