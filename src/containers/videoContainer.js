@@ -5,7 +5,7 @@ import VideoDetails from '../components/videoDetails'
 import VideoList from './videoList'
 
 
-const VideoContainer = ({ id, snippet, videos, handleVideoSelect }) => {
+const VideoContainer = ({ id, snippet, videos, handleVideoSelect, loadMoreVideos }) => {
 	return (
 		<Col>
 			<VideoPlayer videoId={id}/>
@@ -13,6 +13,7 @@ const VideoContainer = ({ id, snippet, videos, handleVideoSelect }) => {
 			<VideoList
 				videos={videos}
 				handleVideoSelect={handleVideoSelect}
+				loadMoreVideos={loadMoreVideos}
 			/>
 		</Col>
 	)
