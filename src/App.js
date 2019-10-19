@@ -43,8 +43,8 @@ class App extends React.Component {
 		})
 	}
 
-getVideos = async (searchTerm) => {
-	const data = await fetch(`${YTSEARCH}&q=${searchTerm}`).then(res => res.json())
+getVideos = async (searchTerm, pageToken = '') => {
+	const data = await fetch(`${YTSEARCH}&q=${searchTerm}&pageToken=${pageToken}`).then(res => res.json())
 	return data.items
 }
 
