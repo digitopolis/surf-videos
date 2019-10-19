@@ -18,19 +18,16 @@ class App extends React.Component {
 	}
 
 	async componentDidMount() {
-		const data = await fetch(`${YTSEARCH}&q=${this.state.searchTerm}`).then(res => res.json())
-		this.setState({
-			searchResults: data.items
-		})
+		// const data = await fetch(`${YTSEARCH}&q=${this.state.searchTerm}`).then(res => res.json())
+		const searchResults = await this.getVideos('surf')
+		this.setState({ searchResults })
 	}
 
-	handleSearch = async (searchTerm) => {
-		const newSearch = `${this.state.searchTerm} ${searchTerm}`
-		const data = await fetch(`${YTSEARCH}&q=${newSearch}`).then(res => res.json())
-		this.setState({
-			searchTerm: newSearch,
-			searchResults: data.items
-		})
+	handleSearch = async (newSearch) => {
+		const searchTerm = `${this.state.searchTerm} ${newSearch}`
+		// const data = await fetch(`${YTSEARCH}&q=${newSearch}`).then(res => res.json())
+		const searchResults = await this.getVideos(searchTerm)
+		this.setState({ searchTerm, searchResults })
 	}
 
 	handleVideoSelect = async (videoId) => {
@@ -47,6 +44,11 @@ class App extends React.Component {
 			videoDetails: {}
 		})
 	}
+
+getVideos = async (searchTerm) => {
+	const data = await fetch(`${YTSEARCH}&q=${searchTerm}`).then(res => res.json())
+	return data.items
+}
 
 	renderMainContent = () => {
 		if (this.state.selectedVideo) {
