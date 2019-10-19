@@ -21,6 +21,13 @@ class SearchBar extends React.Component {
 		this.props.newSearch(this.state.searchTerm)
 	}
 
+	handleReset = () => {
+		this.props.resetSearch()
+		this.setState({
+			searchTerm: ''
+		})
+	}
+
 	render() {
 		return (
 			<Col md={{ span: 7 }} className='py-1'>
@@ -34,7 +41,7 @@ class SearchBar extends React.Component {
 							<Button variant='secondary' type='submit'>Search</Button>
 							<Button
 								variant={this.props.resetStyle}
-								onClick={this.props.resetSearch}>Reset</Button>
+								onClick={this.handleReset}>Reset</Button>
 						</InputGroup.Append>
 					</InputGroup>
 				</Form>
