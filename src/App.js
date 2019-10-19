@@ -59,7 +59,7 @@ getVideos = async (searchTerm, pageToken = '') => {
 	return results
 }
 
-loadMoreVideos = async (pageToken) => {
+loadMoreVideos = async () => {
 	const searchResults = await this.getVideos(this.state.searchTerm, this.state.nextPageToken)
 	const newVideoList = [...this.state.videos, ...searchResults.videos]
 	this.setState({
@@ -85,6 +85,7 @@ handleReset = async () => {
 			return <VideoList
 							videos={this.state.videos}
 							handleVideoSelect={this.handleVideoSelect}
+							loadMoreVideos={this.loadMoreVideos}
 						/>
 		}
 	}
