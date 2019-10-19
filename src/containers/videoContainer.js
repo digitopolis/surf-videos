@@ -4,11 +4,11 @@ import VideoPlayer from '../components/videoPlayer'
 import VideoDetails from '../components/videoDetails'
 
 
-const VideoContainer = (props) => {
+const VideoContainer = ({ id, snippet }) => {
 	return (
 		<Col>
-			<VideoPlayer videoId={props.details.id}/>
-			<VideoDetails {...props.details}/>
+			<VideoPlayer videoId={id}/>
+			<VideoDetails {...snippet}/>
 		</Col>
 	)
 }
