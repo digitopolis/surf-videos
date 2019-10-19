@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button'
 import CardColumns from 'react-bootstrap/CardColumns'
 import VideoCard from '../components/videoCard'
 
-const VideoList = ({ videos, handleVideoSelect, loadMoreVideos }) => {
+const VideoList = ({ videos, handleVideoSelect, loadMoreVideos, pageToken }) => {
 	return (
 		<Col md='auto'>
 			<CardColumns>
@@ -17,9 +17,9 @@ const VideoList = ({ videos, handleVideoSelect, loadMoreVideos }) => {
 				})}
 			</CardColumns>
 			<Row className='justify-content-center my-2'>
-				<Button
-					variant='secondary'
-					onClick={loadMoreVideos}>Load more</Button>
+				{ pageToken
+					? <Button variant='secondary' onClick={loadMoreVideos}>Load more</Button>
+					: null }
 			</Row>
 		</Col>
 	)

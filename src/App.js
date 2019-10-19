@@ -13,11 +13,11 @@ class App extends React.Component {
 	state = {
 		searchTerm: 'surf',
 		videos: [],
-		nextPageToken: '',
+		nextPageToken: null,
 		selectedVideo: null,
 		videoDetails: {},
 		moreUserVideos: [],
-		userVideosPageToken: ''
+		userVideosPageToken: null
 	}
 
 	async componentDidMount() {
@@ -74,16 +74,18 @@ loadMoreVideos = async () => {
 		const channelId = this.state.videoDetails.snippet.channelId
 		const searchResults = await this.getUserVideos(channelId, this.state.userVideosPageToken)
 		const newVideoList = [...this.state.moreUserVideos, ...searchResults.videos]
+		const pageToken = searchResults.pageToken ? searchResults.pageToken : null
 		this.setState({
 			moreUserVideos: newVideoList,
-			userVideosPageToken: searchResults.pageToken
+			userVideosPageToken: pageToken
 		})
 	} else {
 		const searchResults = await this.getVideos(this.state.searchTerm, this.state.nextPageToken)
 		const newVideoList = [...this.state.videos, ...searchResults.videos]
+		const pageToken = searchResults.pageToken ? searchResults.pageToken : null
 		this.setState({
 			videos: newVideoList,
-			nextPageToken: searchResults.pageToken
+			nextPageToken: pageToken
 		})
 	}
 }
@@ -109,12 +111,14 @@ handleReset = async () => {
 							videos={this.state.moreUserVideos}
 							handleVideoSelect={this.handleVideoSelect}
 							loadMoreVideos={this.loadMoreVideos}
+							pageToken={this.state.userVideosPageToken}
 						/>
 		} else {
 			return <VideoList
 							videos={this.state.videos}
 							handleVideoSelect={this.handleVideoSelect}
 							loadMoreVideos={this.loadMoreVideos}
+							pageToken={this.state.nextPageToken}
 						/>
 		}
 	}
