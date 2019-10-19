@@ -1,5 +1,5 @@
 import React from 'react';
-import { SURFVIDEOS, ONEVIDEO } from './apiEndpoints'
+import { YTSEARCH, ONEVIDEO } from './apiEndpoints'
 import './App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -11,13 +11,14 @@ import VideoContainer from './containers/videoContainer'
 class App extends React.Component {
 
 	state = {
+		searchTerm: 'surf',
 		searchResults: [],
 		selectedVideo: null,
 		videoDetails: {}
 	}
 
 	async componentDidMount() {
-		const data = await fetch(SURFVIDEOS).then(res => res.json())
+		const data = await fetch(`${YTSEARCH}&q=${this.state.searchTerm}`).then(res => res.json())
 		this.setState({
 			searchResults: data.items
 		})
